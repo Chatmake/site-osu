@@ -1,0 +1,12 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+// GitHub Pages deploy: assets должны грузиться из /<repo>/
+// В GitHub Actions мы ставим GITHUB_PAGES=true.
+const repo = process.env.GITHUB_REPOSITORY?.split("/")[1];
+const base = process.env.GITHUB_PAGES === "true" && repo ? `/${repo}/` : "/";
+
+export default defineConfig({
+  base,
+  plugins: [react()],
+});
